@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vanilla Practice</title>
+    <style>
+        html {
+            font-family: sans-serif;
+            color: #333;
+        }
+
+        body {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        div,
+        article {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #dedede;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Accessing Elements in the DOM</h1>
+
+    <h2>ID (#demo)</h2>
+    <div id='demo'>Access me by ID</div>
+
+    <h2>Class (.demo)</h2>
+    <div class='demo'>Access me by class (1)</div>
+    <div class="demo">Access me by class (2)</div>
+
+    <h2>Tag (article)</h2>
+    <article>Access me by tag (1)</article>
+    <article>Access me by tag (2)</article>
+
+    <h2>Query Selector</h2>
+    <div id='demo-query'>Access me by query</div>
+
+    <h2>Query Selector All</h2>
+    <div class='demo-query-all'>Access me by query all (1)</div>
+    <div class='demo-query-all'>Access me by query all (2)</div>
+
+</body>
+
+<script>
+    //*** getElementById() ***
+    //  easiest way to access a single element in the DOM is by its unique ID
+    // Use getElementById() method of the document object
+    const demoId = document.getElementById('demo');
+    // logging demoId will return the entire HTML element
+    // console.log(demoId)
+    // can change style of demoId 
+    demoId.style.border = '1px solid purple';
+    demoId.style.width = '400px'
+    // Downside of accessing by ID: ID must always be unique, so you can only 
+    // access a single element at a time w/ getElementById()
+
+
+    //*** getElementsByClassName() ****
+    // Class attribute is used to access one more more specific elements in the DOM.
+    // Can access all elements w/ a given class name w/ getElementsByClassName().
+    const demoClass = document.getElementsByClassName('demo');
+
+    // demoClass.style.border = '1px solid orange'
+    // Q: why doesn't this work? 
+    // A: instead of just getting one element, we have an array-like object of elements
+    // console.log(demoClass)
+
+    //  Arrays are accessed by an index #. So we can change the first element of the array by using index 0.
+    // demoClass[0].style.border = '1px solid orange';
+
+    // If we want to apply a change to all elements w/ a particular class, we can create a for loop, and loop through every item in the array.
+
+    for (let i = 0; i < demoClass.length; i++) {
+        demoClass[i].style.border = '1px solid orange';
+        demoClass[i].style.width = '200px';
+    }
+
+
+    // *** getElementsByTagName ***
+    // Another way to access multiple elements is by their HTML tag name.
+    // Using <Article> tag
+    const demoTag = document.getElementsByTagName('article');
+    // console.log(demoTag)
+    // like accessing by class, getElementsByTagName() will return an array.
+    // Can modify every tag with a for loop
+
+    for (let i = 0; i < demoTag.length; i++) {
+        demoTag[i].style.border = '1px solid blue'
+    }
+
+
+    // *** Query Selectors ***
+    // Allow you to access the DOM w/ CSS selectors.
+    // Using querySelector() & querySelectorAll() methods
+
+    // To access a single element, use querySelector()
+    // using demo-query element above
+    const demoQuery = document.querySelector('#demo-query');
+    demoQuery.style.border = '1px solid red'
+    // If there is a selector w/ multiple elements, querySelector will return the first element that matches the query.
+    // Can use querySelectorAll() to collect all the elements that match a specific query. 
+
+    const demoQueryAll = document.querySelectorAll('.demo-query-all');
+    // console.log(demoQueryAll)
+    // can for loop or forEach 
+    // for (let i = 0; i < demoQueryAll.length; i++) {
+    //     demoQueryAll[i].style.border = '1px solid green'
+    // }
+    demoQueryAll.forEach(query => {
+        query.style.border = '1px solid green'
+    })
+
+</script>
+
+</html>
